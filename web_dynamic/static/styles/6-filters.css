@@ -51,6 +51,10 @@ button:hover {
     width: 25%;
 }
 
+.amenities .checkbox {
+    
+}
+
 .popover {
     visibility: hidden;
     width: 100%;
