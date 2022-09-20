@@ -14,7 +14,7 @@ $( document ).ready(function() {
 			$('div.amenities > h4').html('&nbsp;');
 		}
 	});
-	$get('http://0.0.0.0:5001/api/v1/status/', function(data, Status){
+	$.get('http://localhost:5001/api/v1/status/', function(data, Status){
 		if (Status === 'success') {
 			if (data.status === 'OK') {
 				$('#api_status').addClass('available')
@@ -25,12 +25,48 @@ $( document ).ready(function() {
 	});
 	$.ajax({
 		type: 'POST',
-		ContentType: application/JSON,
-		URL: 'http://0.0.0.0:5001/api/v1/places_search',
+		contentType: 'application/json',
+		url: 'http://localhost:5001/api/v1/places_search',
 		dataType: 'json',
-		data: {},
+		data: '{}',
 		success: function (data) {
-			
-
+			for (let i = 0; i < data.length; i++){
+				place = data[i];
+				$('.places').append(
+					`<article>` +
+					`<div class="title_box">` +
+					`<h2>${ place.name }</h2>` +
+					`<div class="price_by_night">${ place.price_by_night }</div>` +
+					`</div>` +
+					`<div class="information">` +
+					`<div class="max_guest">` + `${ place.max_guest } Guest</div>` +
+					`<div class="number_rooms">${ place.number_rooms }` + `Bedroom</div>` +
+					`<div class="number_bathrooms">${ place.number_bathrooms } Bathroom</div>` +
+					`</div>` +
+					`<div class="description">` +
+					`${ place.description | safe }` +
+					`</div>` +
+					`</article>`);
+			}
+		}
 	  });
 });
+
+/*<article>
+<div class="title_box">
+<h2>{{ place.name }}</h2>
+<div class="price_by_night">${{ place.price_by_night }}</div>
+</div>
+<div class="information">
+<div class="max_guest">{{ place.max_guest }} Guest{% if place.max_guest != 1 %}s{% endif %}</div>
+	<div class="number_rooms">{{ place.number_rooms }} Bedroom{% if place.number_rooms != 1 %}s{% endif %}</div>
+	<div class="number_bathrooms">{{ place.number_bathrooms }} Bathroom{% if place.number_bathrooms != 1 %}s{% endif %}</div>
+</div>
+<div class="user">
+	<b>Owner:</b> {{ place.user.first_name }} {{ place.user.last_name }}
+  </div>
+  <div class="description">
+{{ place.description | safe }}
+  </div>
+</article>*/
+
