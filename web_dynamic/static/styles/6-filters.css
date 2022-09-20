@@ -36,6 +36,11 @@ button:hover {
     font-weight: 600;
 }
 .filters h4 {
+    height: 20px;
+    width: 80%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     margin-left: 15%;
     margin-top: 0;
     font-weight: 400;
@@ -49,10 +54,6 @@ button:hover {
 .amenities {
     height: 100%;
     width: 25%;
-}
-
-.amenities .checkbox {
-    
 }
 
 .popover {
